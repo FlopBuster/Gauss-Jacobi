@@ -1,18 +1,38 @@
 import numpy as np
-from functions import gauss_jacobi as gs
+from functions import jacobi, convergence
 
+def main():
+    """
+    Resolução de Sistemas de Equações Lineares
+    pelo Método Iterativo de Jacobi
+    """
 
-A = np.array([[10, 2, 1],[1, 5, 1],[2, 3, 10]], dtype = float)
-b = np.array([7, -8, 6], dtype = float)
-guess = np.array([0.7, -1.6, 0.6], dtype = float)
+    opcao = 0
+    while(opcao != 1):
+        A = np.array(np.matrix(input(f"\nInsira a Matriz dos Coeficientes A (ex.: a11, a12, ..., a1n; ...; ann, ...): "), dtype=float))
 
-sol = gs.jacobi(A,b,E=0.001,N=2,x=guess)
+        if(convergence(A)):
+            print(f"\nCriterio das Linhas satisfeito, o sistema possui convergencia")
+            break;
+        else:
+            print(f"\nCriterio das Linhas nao foi satisfeito, nao e possivel afirmar que o sistema possui convergencia")
+            print(f"\nMenu de opcoes:")
+            print("  0 - Inserir a Matriz dos Coeficientes A novamente permutando linhas/colunas")
+            print("  1 - Continuar de qualquer forma")
+            opcao = int(input())
+            
+    b = np.fromstring(input(f"\nInsira a Matriz dos Termos Independentes b (ex.: b1, b2, ..., bn): "), dtype=float, sep=',')
+    E = float(input(f"\nInsira o erro desejado: "))
+    N = int(input(f"\nInsira o numero maximo de iteracoes desejado: "))
+    guess = np.fromstring(input(f"\nInsira a Matriz Inicial de chute (ex.: x01, x02, ..., x0n): "), dtype=float, sep=',')
+    
+    print(f"\nMatriz dos Coeficientes A: \n{A}")
+    print(f"\nMatriz dos Termos Independentes b: \n{np.vstack(b)}")
 
-print ("A:")
-print(A)
+    solucao = jacobi(A, b, E, N, guess)
+    print(f"\nMatrix Solucao x: \n{np.vstack(solucao[0])}")
+    print(f"\nErro: {solucao[1]}")
+    print(f"Numero de Iteracoes: {solucao[2]}")
 
-print ("b:")
-print(b)
-
-print ("x:")
-print(sol)
+if __name__ == "__main__":
+    main()
