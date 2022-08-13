@@ -1,5 +1,6 @@
 import numpy as np
 from functions import jacobi, convergence
+from scipy.linalg import solve
 
 def main():
     """
@@ -30,9 +31,11 @@ def main():
     print(f"\nMatriz dos Termos Independentes b: \n{np.vstack(b)}")
 
     solucao = jacobi(A, b, E, N, guess)
-    print(f"\nMatrix Solucao x: \n{np.vstack(solucao[0])}")
+    print(f"\nMatrix Solucao Aproximada x: \n{np.vstack(solucao[0])}")
     print(f"\nErro: {solucao[1]}")
     print(f"Numero de Iteracoes: {solucao[2]}")
+
+    print(f"\nSolucao Real: \n{np.vstack(solve(A, b))}")
 
 if __name__ == "__main__":
     main()
