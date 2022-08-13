@@ -14,19 +14,19 @@ def jacobi(A, b, E=0, N=25, x=None):
     # Método de Jacobi é iterado até que seja satisfeita a precisão ou até que seja atingido o número máximo de iterações
     # Se esses dados não forem fornecidos pelo usuário, assume-se: precisão -> E = 0 e iterações max -> N = 25
     i = 0
-    dr = 1
-    while(dr > E and i <= N):
+    calc_err = 1
+    while(calc_err > E and i <= N):
         # Valor anterior do vetor x é armazenado em _x
         _x = x
 
         # Aplicação do Método de Jacobi: x = (b - C._x) / D
         x = (b - np.dot(C, _x)) / D
 
-        # Cálculo do erro ou distância relativa: dr = max|x - _x| / max|x|
-        dr = np.max(np.abs(x - _x)) / np.max(x)
+        # Cálculo do erro ou distância relativa: calc_err = max|x - _x| / max|x|
+        calc_err = np.max(np.abs(x - _x)) / np.max(x)
 
         # Incremento do número de iterações i
         i += 1
 
     # Função retorna o vetor x dos resultados aproximados, o erro e o número de iterações
-    return (x, dr, i)
+    return (x, calc_err, i)
