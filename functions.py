@@ -1,7 +1,10 @@
 import numpy as np
 
 def jacobi(A, b, E=0, N=25, x=None):
-    """Resolve o Sistema de Equações Ax = b pelo Método Iterativo de Jacobi"""
+    """
+    Resolve o Sistema de Equações Ax = b 
+    pelo Método Iterativo de Jacobi
+    """
     
     # Chute inicial é um vetor nulo se não for fornecido pelo usuário
     if x is None:
@@ -42,4 +45,5 @@ def convergence(A):
     C = A - np.diagflat(D)
 
     # Para cada linha, os elementos da diagonal principal devem ser maiores que a soma dos demais
+    # Função retorna True quando houver convergência e False quando não é possível afirmar se há convergência
     return np.all(D > np.sum(C, axis=1))

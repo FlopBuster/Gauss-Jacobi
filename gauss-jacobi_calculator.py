@@ -1,13 +1,13 @@
 import numpy as np
-from functions import jacobi, convergence
 from scipy.linalg import solve
+from functions import jacobi, convergence
 
 def main():
     """
     Resolução de Sistemas de Equações Lineares
     pelo Método Iterativo de Jacobi
     """
-
+    
     opcao = 0
     while(opcao != 1):
         A = np.array(np.matrix(input(f"\nInsira a Matriz dos Coeficientes A (ex.: a11, a12, ..., a1n; ...; ann, ...): "), dtype=float))
