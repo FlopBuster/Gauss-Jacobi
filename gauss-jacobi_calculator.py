@@ -7,7 +7,7 @@ def main():
     Resolução de Sistemas de Equações Lineares
     pelo Método Iterativo de Jacobi
     """
-    
+
     opcao = 0
     while(opcao != 1):
         A = np.array(np.matrix(input(f"\nInsira a Matriz dos Coeficientes A (ex.: a11, a12, ..., a1n; ...; ann, ...): "), dtype=float))
@@ -31,11 +31,11 @@ def main():
     print(f"\nMatriz dos Termos Independentes b: \n{np.vstack(b)}")
 
     solucao = jacobi(A, b, E, N, guess)
-    print(f"\nMatrix Solucao Aproximada x: \n{np.vstack(solucao[0])}")
+    print(f"\nMatriz da Solucao Aproximada x: \n{np.vstack(solucao[0])}")
     print(f"\nErro: {solucao[1]}")
     print(f"Numero de Iteracoes: {solucao[2]}")
 
-    print(f"\nSolucao Real: \n{np.vstack(solve(A, b))}")
+    print(f"\nMatriz da Solucao Real: \n{np.vstack(solve(A, b))}")
 
 if __name__ == "__main__":
     main()
