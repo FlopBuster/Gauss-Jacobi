@@ -12,7 +12,7 @@ def jacobi(A, b, E=0, N=25, x=None):
 
     # Elementos da diagonal principal são subtraídos da Matriz de Coeficientes A
     D = np.diag(A)
-    C = A - np.diagflat(D)
+    R = A - np.diagflat(D)
 
     # Método de Jacobi é iterado até que seja satisfeita a precisão ou até que seja atingido o número máximo de iterações
     # Se esses dados não forem fornecidos pelo usuário, assume-se: precisão -> E = 0 e iterações max -> N = 25
@@ -22,8 +22,8 @@ def jacobi(A, b, E=0, N=25, x=None):
         # Valor anterior do vetor x é armazenado em _x
         _x = x
 
-        # Aplicação do Método de Jacobi: x = (b - C._x) / D
-        x = (b - np.dot(C, _x)) / D
+        # Aplicação do Método de Jacobi: x = (b - R._x) / D
+        x = (b - np.dot(R, _x)) / D
 
         # Cálculo do erro ou distância relativa: calc_err = max|x - _x| / max|x|
         calc_err = np.max(np.abs(x - _x)) / np.max(np.abs(x))
@@ -42,8 +42,8 @@ def convergence(A):
 
     # Elementos da diagonal principal são subtraídos da Matriz de Coeficientes A
     D = np.diag(A)
-    C = A - np.diagflat(D)
+    R = A - np.diagflat(D)
 
     # Para cada linha, os elementos da diagonal principal devem ser maiores que a soma dos demais
     # Função retorna True quando houver convergência e False quando não é possível afirmar se há convergência
-    return np.all(D > np.sum(C, axis=1))
+    return np.all(D > np.sum(R, axis=1))
