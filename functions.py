@@ -53,4 +53,4 @@ def convergence(A):
 
     # Para cada linha, os elementos da diagonal principal devem ser maiores que a soma dos demais
     # Função retorna True quando houver convergência e False quando não é possível afirmar se há convergência
-    return np.all(D > np.sum(R, axis=1))
+    return np.all(D >= np.sum(R, axis=1))
