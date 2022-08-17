@@ -29,13 +29,15 @@ def main():
     
     print(f"\nMatriz dos Coeficientes A: \n{A}")
     print(f"\nMatriz dos Termos Independentes b: \n{np.vstack(b)}")
+    print(f"\nMatriz Inicial de chute: \n{np.vstack(guess)}")
+    print(f"\n--------------------------------------")
 
     solucao = jacobi(A, b, E, N, guess)
     print(f"\nMatriz da Solucao Aproximada x: \n{np.vstack(solucao[0])}")
     print(f"\nErro: {solucao[1]}")
     print(f"Numero de Iteracoes: {solucao[2]}")
 
-    print(f"\nMatriz da Solucao Real: \n{np.vstack(solve(A, b))}")
+    print(f"\nMatriz da Solucao Real: \n{np.vstack(solve(A, b))}\n")
 
 if __name__ == "__main__":
     main()

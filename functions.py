@@ -10,9 +10,16 @@ def jacobi(A, b, E=0, N=25, x=None):
     if x is None:
         x = np.zeros(len(A[0]))
 
-    # Elementos da diagonal principal são subtraídos da Matriz de Coeficientes A
+    # Manipulação na Matriz dos Coeficientes A para criação da Matriz C:
+    # - Elementos da Diagonal Principal são subtraídos de A
+    # - Matriz é dividida pelo Elemento da Diagonal Principal correspondente de cada linha
+    # - Matriz é negada
     D = np.diag(A)
-    R = A - np.diagflat(D)
+    C = - (A - np.diagflat(D)) / np.vstack(D)
+
+    # Manipulação na Matriz dos Termos Independentes b para criação da Matriz g:
+    # - Matriz é dividida pelo Elemento da Diagonal Principal correspondente de cada linha
+    g = b / D
 
     # Método de Jacobi é iterado até que seja satisfeita a precisão ou até que seja atingido o número máximo de iterações
     # Se esses dados não forem fornecidos pelo usuário, assume-se: precisão -> E = 0 e iterações max -> N = 25
@@ -22,8 +29,8 @@ def jacobi(A, b, E=0, N=25, x=None):
         # Valor anterior do vetor x é armazenado em _x
         _x = x
 
-        # Aplicação do Método de Jacobi: x = (b - R._x) / D
-        x = (b - np.dot(R, _x)) / D
+        # Aplicação do Método de Jacobi: x = C._x + g
+        x = np.dot(C, _x) + g
 
         # Cálculo do erro ou distância relativa: calc_err = max|x - _x| / max|x|
         calc_err = np.max(np.abs(x - _x)) / np.max(np.abs(x))
